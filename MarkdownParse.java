@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class MarkdownParse {
     public static ArrayList<String> getLinks(String markdown) {
@@ -24,8 +25,12 @@ public class MarkdownParse {
                 int nextCloseParen = markdown.indexOf(')', nextCloseBracket + 1);
                 if (nextCloseParen == -1)
                     break;
-                if(nextCloseParen - nextCloseBracket + 2 > 0)
-                    toReturn.add(markdown.substring(nextCloseBracket + 2, nextCloseParen));
+                if (nextCloseParen - nextCloseBracket + 2 > 0) {
+                    String possURL = markdown.substring(nextCloseBracket + 2, nextCloseParen);
+                    if (Pattern.matches("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]",
+                            possURL))
+                        toReturn.add(possURL);
+                }
                 currentIndex = nextCloseParen + 1;
             }
         }
