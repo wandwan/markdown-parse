@@ -17,17 +17,25 @@ public class MarkdownParse {
             if (nextOpenBracket == -1)
                 break;
             int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
-            if (nextCloseBracket == -1)
+            String betweenBracket = markdown.substring(nextOpenBracket + 1,
+                    nextCloseBracket);
+            if (nextCloseBracket == -1 || betweenBracket.equals("!Image")
+                    || betweenBracket.equals("!File")) {
                 break;
+            }
             currentIndex = nextCloseBracket + 1;
             System.out.println(nextOpenBracket + " " + nextCloseBracket);
-            if (nextCloseBracket < markdown.length() + 1 && markdown.charAt(nextCloseBracket + 1) == '(') {
-                int nextCloseParen = markdown.indexOf(')', nextCloseBracket + 1);
+            if (nextCloseBracket < markdown.length() + 1
+                    && markdown.charAt(nextCloseBracket + 1) == '(') {
+                int nextCloseParen = markdown.indexOf(')',
+                        nextCloseBracket + 1);
                 if (nextCloseParen == -1)
                     break;
                 if (nextCloseParen - nextCloseBracket + 2 > 0) {
-                    String possURL = markdown.substring(nextCloseBracket + 2, nextCloseParen);
-                    if (Pattern.matches("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]",
+                    String possURL = markdown.substring(nextCloseBracket + 2,
+                            nextCloseParen);
+                    if (Pattern.matches(
+                            "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]",
                             possURL))
                         toReturn.add(possURL);
                 }
@@ -38,6 +46,10 @@ public class MarkdownParse {
     }
 
     public static void main(String[] args) throws IOException {
+        if (args.length == 0) {
+            System.out.println("Please provide a file to parse");
+            return;
+        }
         Path fileName = Path.of(args[0]);
         String contents = Files.readString(fileName);
         ArrayList<String> links = getLinks(contents);
