@@ -24,7 +24,6 @@ public class MarkdownParse {
                 break;
             }
             currentIndex = nextCloseBracket + 1;
-            System.out.println(nextOpenBracket + " " + nextCloseBracket);
             if (nextCloseBracket < markdown.length() + 1
                     && markdown.charAt(nextCloseBracket + 1) == '(') {
                 int nextCloseParen = markdown.indexOf(')',
@@ -35,7 +34,7 @@ public class MarkdownParse {
                     String possURL = markdown.substring(nextCloseBracket + 2,
                             nextCloseParen);
                     if (Pattern.matches(
-                            "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]",
+                            "[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]",
                             possURL))
                         toReturn.add(possURL);
                 }
@@ -46,7 +45,7 @@ public class MarkdownParse {
     }
 
     public static void main(String[] args) throws IOException {
-        if (args.length == 0) {
+        if (args.length == 0 || args == null) {
             System.out.println("Please provide a file to parse");
             return;
         }
