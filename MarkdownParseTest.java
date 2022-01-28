@@ -37,8 +37,8 @@ public class MarkdownParseTest { // create a class called MarkdownParseTest
     @Test
     public void testGetLinks3() throws IOException {
         String[] expected = { "[https://something.com, some-page.html]", "[]",
-                "[]", "[]", "[page.com]" };
-        for (int i = 2; i < 10; i++) {
+                "[]", "[]", "[page.com]", "[]", "[]"};
+        for (int i = 2; i < 9; i++) {
             String[] args = {
                     "/home/camel/markdown-parse/test-file" + i + ".md" };
             Path fileName = Path.of(args[0]);
