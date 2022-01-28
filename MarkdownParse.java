@@ -17,9 +17,11 @@ public class MarkdownParse {
             if (nextOpenBracket == -1)
                 break;
             int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
+            if (nextCloseBracket == -1)
+                break;
             String betweenBracket = markdown.substring(nextOpenBracket + 1,
                     nextCloseBracket);
-            if (nextCloseBracket == -1 || betweenBracket.equals("!Image")
+            if (betweenBracket.equals("!Image")
                     || betweenBracket.equals("!File")) {
                 break;
             }

@@ -29,19 +29,23 @@ public class MarkdownParseTest { // create a class called MarkdownParseTest
         Path fileName = Path.of(args[0]);
         String contents = Files.readString(fileName);
         ArrayList<String> links = MarkdownParse.getLinks(contents);
-        assertEquals(links.toString(), "[https://www.google.com, www.bing.com]");
+        assertEquals(links.toString(),
+                "[https://www.google.com, www.bing.com]");
     }
-    //test all 8 test files
+
+    // test all 8 test files
     @Test
     public void testGetLinks3() throws IOException {
-        String[] expected = {"[https://something.com, some-page.html]","[]","[]","[]","[page.com]"};
-        for(int i = 2; i < 10; i++) {
-            String[] args = { "/home/camel/markdown-parse/test-file" + i + ".md" };
+        String[] expected = { "[https://something.com, some-page.html]", "[]",
+                "[]", "[]", "[page.com]" };
+        for (int i = 2; i < 10; i++) {
+            String[] args = {
+                    "/home/camel/markdown-parse/test-file" + i + ".md" };
             Path fileName = Path.of(args[0]);
             String contents = Files.readString(fileName);
             ArrayList<String> links = MarkdownParse.getLinks(contents);
             System.out.println(links.toString());
-            if(i - 2 < expected.length)
+            if (i - 2 < expected.length)
                 assertEquals(links.toString(), expected[i - 2]);
             else
                 assertEquals(links.toString(), "");
