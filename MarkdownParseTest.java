@@ -39,7 +39,8 @@ public class MarkdownParseTest { // create a class called MarkdownParseTest
         Path fileName = Path.of(args[0]);
         String contents = Files.readString(fileName);
         ArrayList<String> links = MarkdownParse.getLinks(contents);
-        assertEquals(links.toString(), "[]");
+        System.out.println(links);
+        assertEquals("[whatever]", links.toString());
     }
 
     // test all 8 test files
