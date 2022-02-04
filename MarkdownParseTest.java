@@ -32,15 +32,16 @@ public class MarkdownParseTest { // create a class called MarkdownParseTest
         assertEquals(links.toString(),
                 "[https://www.google.com, www.bing.com]");
     }
+
     @Test
     public void testGetLinks4() throws IOException {
         String[] args = { "test-file9.md" };
         Path fileName = Path.of(args[0]);
         String contents = Files.readString(fileName);
         ArrayList<String> links = MarkdownParse.getLinks(contents);
-        assertEquals(links.toString(),
-                "[https://www.google.com, www.bing.com]");
+        assertEquals(links.toString(), "[]");
     }
+
     // test all 8 test files
     @Test
     public void testGetLinks3() throws IOException {
