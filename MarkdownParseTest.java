@@ -15,7 +15,7 @@ public class MarkdownParseTest { // create a class called MarkdownParseTest
 
     @Test
     public void testGetLinks() throws IOException {
-        String[] args = { "/home/camel/markdown-parse/test-file.md" };
+        String[] args = { "test-file.md" };
         Path fileName = Path.of(args[0]);
         String contents = Files.readString(fileName);
         ArrayList<String> links = MarkdownParse.getLinks(contents);
@@ -25,7 +25,7 @@ public class MarkdownParseTest { // create a class called MarkdownParseTest
 
     @Test
     public void testGetLinks2() throws IOException {
-        String[] args = { "/home/camel/markdown-parse/new-test.md" };
+        String[] args = { "new-test.md" };
         Path fileName = Path.of(args[0]);
         String contents = Files.readString(fileName);
         ArrayList<String> links = MarkdownParse.getLinks(contents);
@@ -37,10 +37,9 @@ public class MarkdownParseTest { // create a class called MarkdownParseTest
     @Test
     public void testGetLinks3() throws IOException {
         String[] expected = { "[https://something.com, some-page.html]", "[]",
-                "[]", "[]", "[page.com]", "[]", "[]"};
+                "[]", "[]", "[page.com]", "[]", "[]" };
         for (int i = 2; i < 9; i++) {
-            String[] args = {
-                    "/home/camel/markdown-parse/test-file" + i + ".md" };
+            String[] args = { "test-file" + i + ".md" };
             Path fileName = Path.of(args[0]);
             String contents = Files.readString(fileName);
             ArrayList<String> links = MarkdownParse.getLinks(contents);
