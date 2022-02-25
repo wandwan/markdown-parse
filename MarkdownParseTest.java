@@ -14,6 +14,21 @@ public class MarkdownParseTest { // create a class called MarkdownParseTest
     }
 
     @Test
+    public void testlab1() throws IOException {
+        Path fileName = Path.of("./lab1.md");
+        String contents = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(contents);
+        assertEquals(links.size(), 3);
+        assertEquals(links.get(0),
+                "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+        assertEquals(links.get(1),
+                "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+        assertEquals(links.get(2),
+                "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+
+    }
+
+    @Test
     public void testGetLinks() throws IOException {
         String[] args = { "test-file.md" };
         Path fileName = Path.of(args[0]);
