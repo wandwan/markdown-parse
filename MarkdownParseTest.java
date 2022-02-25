@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.*; //import the junit library
 
@@ -15,16 +17,13 @@ public class MarkdownParseTest { // create a class called MarkdownParseTest
 
     @Test
     public void testlab1() throws IOException {
-        Path fileName = Path.of("./lab1.md");
+        Path fileName = Path.of("./labtest1.md");
         String contents = Files.readString(fileName);
         ArrayList<String> links = MarkdownParse.getLinks(contents);
+        ArrayList<String> expected = (ArrayList<String>) Arrays.asList(
+                new String[] { "`google.com", "google.com", "ucsd.edu" });
         assertEquals(links.size(), 3);
-        assertEquals(links.get(0),
-                "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
-        assertEquals(links.get(1),
-                "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
-        assertEquals(links.get(2),
-                "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+        assertEquals(links.toString(), expected.toString());
 
     }
 
